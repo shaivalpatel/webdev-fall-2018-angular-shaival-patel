@@ -1,67 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {FormsModule} from '@angular/forms';
+import {routing} from './app.routing';
 import { AppComponent } from './app.component';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
-import {FormsModule} from "@angular/forms";
-import {CourseNavigatorServiceClient} from "./services/course-navigator.service.client";
-import { CourseNavigatorComponent } from './course-navigator/course-navigator.component';
-import { WhiteBoardComponent } from './white-board/white-board.component';
-import { CourseGridComponent } from './course-grid/course-grid.component';
-import {CourseServiceClient} from "./services/course.service.client";
-import {routing} from "./app.routing";
-import { CourseViewerComponent } from './course-viewer/course-viewer.component';
-import { ModuleListComponent } from './module-list/module-list.component';
-import {ModuleServiceClient} from "./services/module.service.client";
-import { LessonTabsComponent } from './lesson-tabs/lesson-tabs.component';
-import {LessonServiceClient} from "./services/lesson.service.client";
-import { WidgetListComponent } from './widget-list/widget-list.component';
-import {WidgetServiceClient} from "./services/widget.service.client";
+import { CourseListComponent } from './course-list/course-list.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
-import {UserServiceClient} from "./services/user.service.client";
-import { SectionListComponent } from './section-list/section-list.component';
-import {SectionServiceClient} from "./services/section.service.client";
-import { QuizListComponent } from './quiz-list/quiz-list.component';
-import {QuizServiceClient} from "./services/quiz.service.client";
-import { QuizTakerComponent } from './quiz-taker/quiz-taker.component';
-import { QuizSubmissionsComponent } from './quiz-submissions/quiz-submissions.component';
+import { HomeComponent } from './home/home.component';
+import {UserService} from './services/user.service.client';
+import {CourseService} from './services/course.service.client';
+import { ModuleListComponent } from './module-list/module-list.component';
+import {ModuleService} from './services/module.service.client';
+import { LessonListComponent } from './lesson-list/lesson-list.component';
+import {LessonService} from './services/lesson.service.client';
+import { TopicListComponent } from './topic-list/topic-list.component';
+import {TopicService} from './services/topic.service.client';
+import { WidgetListComponent } from './widget-list/widget-list.component';
+import {WidgetService} from './services/widget.service.client';
 
 @NgModule({
   declarations: [
     AppComponent,
     HelloWorldComponent,
-    CourseNavigatorComponent,
-    WhiteBoardComponent,
-    CourseGridComponent,
-    CourseViewerComponent,
-    ModuleListComponent,
-    LessonTabsComponent,
-    WidgetListComponent,
+    CourseListComponent,
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    SectionListComponent,
-    QuizListComponent,
-    QuizTakerComponent,
-    QuizSubmissionsComponent
+    HomeComponent,
+    ModuleListComponent,
+    LessonListComponent,
+    TopicListComponent,
+    WidgetListComponent
   ],
   imports: [
+    routing,
     BrowserModule,
-    FormsModule,
-    routing
+    FormsModule
   ],
-  providers: [
-    CourseNavigatorServiceClient,
-    CourseServiceClient,
-    ModuleServiceClient,
-    LessonServiceClient,
-    WidgetServiceClient,
-    UserServiceClient,
-    SectionServiceClient,
-    QuizServiceClient
-  ],
+  providers: [UserService, CourseService, ModuleService, LessonService, TopicService, WidgetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

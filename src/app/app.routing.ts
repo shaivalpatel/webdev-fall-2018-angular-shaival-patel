@@ -1,26 +1,21 @@
 import { Routes, RouterModule } from '@angular/router';
-import { WhiteBoardComponent } from "./white-board/white-board.component";
-import {CourseViewerComponent} from "./course-viewer/course-viewer.component";
-import {LoginComponent} from "./login/login.component";
-import {RegisterComponent} from "./register/register.component";
-import {ProfileComponent} from "./profile/profile.component";
-import {SectionListComponent} from "./section-list/section-list.component";
-import {QuizListComponent} from "./quiz-list/quiz-list.component";
-import {QuizTakerComponent} from "./quiz-taker/quiz-taker.component";
-import {QuizSubmissionsComponent} from "./quiz-submissions/quiz-submissions.component";
+import { LoginComponent } from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {ProfileComponent} from './profile/profile.component';
+import {CourseListComponent} from './course-list/course-list.component';
+import {ModuleListComponent} from './module-list/module-list.component';
+import {LessonListComponent} from './lesson-list/lesson-list.component';
+import {TopicListComponent} from './topic-list/topic-list.component';
+import {WidgetListComponent} from './widget-list/widget-list.component';
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', component: WhiteBoardComponent},
-  { path: 'quizzes', component: QuizListComponent},
-  { path: 'quiz/:quizId', component: QuizTakerComponent},
-  { path: 'quiz/:quizId/submissions', component: QuizSubmissionsComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'course/:courseId', component: CourseViewerComponent },
-  { path: 'course/:courseId/section', component: SectionListComponent },
-  { path: 'course/:courseId/module/:moduleId', component: CourseViewerComponent },
-  { path: 'course/:courseId/module/:moduleId/lesson/:lessonId', component: CourseViewerComponent },
-  { path: '**', component: WhiteBoardComponent} // last
+  { path: 'login', component: LoginComponent },
+  { path: 'course/:userId', component: CourseListComponent },
+  { path: 'course/:userId/course/:courseId/module', component: ModuleListComponent },
+  { path: 'course/:userId/course/:courseId/module/:moduleId/lesson', component:  ModuleListComponent },
+  { path: 'course/:userId/course/:courseId/module/:moduleId/lesson/:lessonId/topic', component:  ModuleListComponent  },
+  { path: 'course/:userId/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId/widget', component:  ModuleListComponent  },
+  {path: 'register', component: RegisterComponent},
+  {path: 'profile/:userId', component: ProfileComponent}
 ];
 export const routing = RouterModule.forRoot(appRoutes);
+

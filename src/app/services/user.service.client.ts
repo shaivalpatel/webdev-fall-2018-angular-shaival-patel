@@ -1,52 +1,45 @@
-export class UserServiceClient {
+import { Injectable } from '@angular/core';
+@Injectable()
+export class UserService {
+  logged = false;
+  users = [
+    {_id: 123, username: 'alice', password: 'alice'},
+    {_id: 234, username: 'bob', password: 'bob'}
+  ];
+ findUserByCredentials(username, password) {
+     return fetch('http://localhost:8080/api/login',
+       {
+         credentials: 'include',
+         method: 'POST',
+         body: JSON.stringify({
+           'username': username,
+           'password': password
+         }),
+         headers: {
+           'Content-type': 'application/json'
+         }
 
+       });
+  }
   findUserById(userId) {
-    return fetch('http://localhost:4000/api/user/' + userId)
-      .then(response => response.json());
+    return  fetch('http://localhost:8080/api/user/' + userId, {
+      credentials : 'include'
+    });
   }
 
   login(username, password) {
-    const credentials = {
-      username: username,
-      password: password
-    };
-    return fetch('http://localhost:4000/api/login', {
-      method: 'post',
-      body: JSON.stringify(credentials),
-      credentials: 'include',
-      headers: {
-        'content-type': 'application/json'
-      }
-    });
-  }
-
-  logout() {
-    return fetch('http://localhost:4000/api/logout', {
-      method: 'post',
-      credentials: 'include'
-    });
-  }
-
-  profile() {
-    return fetch('http://localhost:4000/api/profile',
+    return fetch('http://localhost:8080/api/login',
       {
-        credentials: 'include', // include, same-origin, *omit
-      })
-      .then(response => response.json());
-  }
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify({
+          'username': username,
+          'password': password
+        }),
+        headers: {
+          'Content-type': 'application/json'
+        }
 
-  createUser(username, password) {
-    const user = {
-      username: username,
-      password: password
-    };
-    return fetch('http://localhost:4000/api/user', {
-      body: JSON.stringify(user),
-      credentials: 'include', // include, same-origin, *omit
-      method: 'post',
-      headers: {
-        'content-type': 'application/json'
-      }
-    });
-  }
+      });
+    }
 }

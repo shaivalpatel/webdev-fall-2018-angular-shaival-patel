@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../models/user.model.client";
-import {UserServiceClient} from "../services/user.service.client";
-import {Router} from "@angular/router";
-import {SectionServiceClient} from "../services/section.service.client";
+import { ActivatedRoute } from '@angular/router';
+import {UserService} from '../services/user.service.client';
 
 @Component({
   selector: 'app-profile',
@@ -11,36 +9,15 @@ import {SectionServiceClient} from "../services/section.service.client";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private service: UserServiceClient,
-              private sectionService: SectionServiceClient,
-              private router: Router) { }
+  constructor(private userService: UserService, private activatedRoute: ActivatedRoute) { }
 
-  user = {};
-  username;
-  password;
-  sections = [];
-
-  update(user) {
-    console.log(user);
-  }
-
-  logout() {
-    this.service
-      .logout()
-      .then(() =>
-        this.router.navigate(['login']));
-
-  }
-
+  user = {}
   ngOnInit() {
-    this.service
-      .profile()
-      .then(user =>
-        this.username = user.username);
+    this.activatedRoute.params
+      .subscribe(
+        params =>  this.userService.findUserById(params.userId).then(response => response.json()).then(user => this.user = user)
+      );
 
-    this.sectionService
-      .findSectionsForStudent()
-      .then(sections => this.sections = sections );
   }
 
 }
